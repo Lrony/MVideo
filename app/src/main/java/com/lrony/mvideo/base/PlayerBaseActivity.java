@@ -4,20 +4,19 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import cn.bmob.v3.Bmob;
+import cn.jzvd.JZVideoPlayer;
 
 /**
- * Created by lrony on 2018/2/23.
+ * Created by pengyang on 18-2-24.
  */
-public class BaseActivity extends AppCompatActivity {
+public class PlayerBaseActivity extends AppCompatActivity {
 
-    private static final String TAG = "BaseActivity";
+    private static final String TAG = "PlayerBaseActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
-        Bmob.initialize(this, "70f9ac4b0c985f1f70b118089bea76d7");
     }
 
     @Override
@@ -42,5 +41,18 @@ public class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy");
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (JZVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JZVideoPlayer.releaseAllVideos();
     }
 }
