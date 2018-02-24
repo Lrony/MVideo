@@ -16,7 +16,10 @@ import com.lrony.mvideo.fragment.VideoFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, ViewPager.OnPageChangeListener {
+import cn.jzvd.JZVideoPlayer;
+
+public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener
+        , ViewPager.OnPageChangeListener {
 
     private static final String TAG = "MainActivity";
 
@@ -95,6 +98,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 viewPager.setCurrentItem(ITEM_2);
                 break;
         }
+        JZVideoPlayer.releaseAllVideos();
     }
 
     @Override
@@ -104,7 +108,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     public void onTabReselected(int position) {
-
+        VideoFragment.setListScrollPosition(0);
     }
 
     @Override
